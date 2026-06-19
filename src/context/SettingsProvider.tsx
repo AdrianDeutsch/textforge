@@ -1,16 +1,7 @@
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import type { ApiSettings, ModeSettings } from '../types/settings';
 import { SettingsRepository } from '../services/storage/SettingsRepository';
-
-interface SettingsContextValue {
-  api: ApiSettings;
-  mode: ModeSettings;
-  updateApi: (patch: Partial<ApiSettings>) => void;
-  updateMode: (patch: Partial<ModeSettings>) => void;
-  isApiConfigured: boolean;
-}
-
-const SettingsContext = createContext<SettingsContextValue | null>(null);
+import { SettingsContext, type SettingsContextValue } from './SettingsContext';
 
 interface SettingsProviderProps {
   children: ReactNode;
@@ -46,12 +37,4 @@ export function SettingsProvider({ children, repository }: SettingsProviderProps
   );
 
   return <SettingsContext.Provider value={value}>{children}</SettingsContext.Provider>;
-}
-
-export function useSettings(): SettingsContextValue {
-  const ctx = useContext(SettingsContext);
-  if (!ctx) {
-    throw new Error('useSettings must be used within a SettingsProvider');
-  }
-  return ctx;
 }

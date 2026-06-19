@@ -9,7 +9,8 @@ interface UseLlmRequestResult {
   output: string;
   error: string | null;
   elapsedMs: number | null;
-  send: (input: string, api: ApiSettings, mode: ModeSettings) => Promise<void>;
+  /** Resolves to the elapsed time in ms on success, or `null` on failure. */
+  send: (input: string, api: ApiSettings, mode: ModeSettings) => Promise<number | null>;
   clearOutput: () => void;
   dismissError: () => void;
 }
@@ -27,25 +28,36 @@ export function useLlmRequest(): UseLlmRequestResult {
   const [error, setError] = useState<string | null>(null);
   const [elapsedMs, setElapsedMs] = useState<number | null>(null);
 
-  const send = useCallback(async (input: string, api: ApiSettings, mode: ModeSettings) => {
-    setError(null);
-    setLoading(true);
-    setElapsedMs(null);
-    const t0 = performance.now();
+  const send = useCallback(
+    async (input: string, api: ApiSettings, mode: ModeSettings): Promise<number | null> => {
+      setError(null);
+      setLoading(true);
+      setElapsedMs(null);
+      const t0 = performance.now();
 
-    try {
-      const userPrompt = builderRef.current.buildUserPrompt(input, mode);
-      const systemPrompt = builderRef.current.buildSystemPrompt();
-      const content = await clientRef.current.complete(api, { systemPrompt, userPrompt });
-      setOutput(content);
-      setElapsedMs(Math.round(performance.now() - t0));
-    } catch (err) {
-      const message = err instanceof LlmApiError && err.hint ? `${err.message} ${err.hint}` : err instanceof Error ? err.message : String(err);
-      setError(message);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+      try {
+        const userPrompt = builderRef.current.buildUserPrompt(input, mode);
+        const systemPrompt = builderRef.current.buildSystemPrompt();
+        const content = await clientRef.current.complete(api, { systemPrompt, userPrompt });
+        setOutput(content);
+        const ms = Math.round(performance.now() - t0);
+        setElapsedMs(ms);
+        return ms;
+      } catch (err) {
+        const message =
+          err instanceof LlmApiError && err.hint
+            ? `${err.message} ${err.hint}`
+            : err instanceof Error
+              ? err.message
+              : String(err);
+        setError(message);
+        return null;
+      } finally {
+        setLoading(false);
+      }
+    },
+    [],
+  );
 
   const clearOutput = useCallback(() => setOutput(''), []);
   const dismissError = useCallback(() => setError(null), []);

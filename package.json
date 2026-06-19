@@ -1,7 +1,8 @@
 {
-  "name": "app",
+  "name": "textforge",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Client-side single-shot LLM text tools — translate, correct grammar, and comment code with any OpenAI-compatible endpoint.",
   "type": "module",
   "scripts": {
     "dev": "vite",

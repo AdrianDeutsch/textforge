@@ -1,14 +1,18 @@
-# LLM Textwerkzeuge
+# Textforge
 
-> Eine clientseitige Single-Shot-Werkzeugsammlung für Übersetzung, Rechtschreib-/Grammatikkorrektur und Code-Kommentierung – betrieben mit jedem OpenAI-kompatiblen LLM-Endpoint.
+> **LLM Textwerkzeuge** – eine clientseitige Single-Shot-Werkzeugsammlung für Übersetzung, Rechtschreib-/Grammatikkorrektur und Code-Kommentierung, betrieben mit jedem OpenAI-kompatiblen LLM-Endpoint.
 
-<p>
+<p align="center">
+  <a href="https://adriandeutsch.github.io/textforge/"><img alt="Live demo" src="https://img.shields.io/badge/Live_demo-GitHub_Pages-222?logo=githubpages&logoColor=white" /></a>
+  <a href="https://github.com/AdrianDeutsch/textforge/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/AdrianDeutsch/textforge/actions/workflows/ci.yml/badge.svg" /></a>
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg" /></a>
   <img alt="React" src="https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white" />
-  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5%2B-3178C6?logo=typescript&logoColor=white" />
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript&logoColor=white" />
   <img alt="Vite" src="https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white" />
   <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-4-38BDF8?logo=tailwindcss&logoColor=white" />
-  <img alt="GitHub Pages" src="https://img.shields.io/badge/Deploy-GitHub_Pages-222?logo=githubpages&logoColor=white" />
 </p>
+
+**🔗 Live: [adriandeutsch.github.io/textforge](https://adriandeutsch.github.io/textforge/)** — eigenen API-Key eintragen und loslegen.
 
 ---
 
@@ -48,8 +52,8 @@ Voraussetzung: **Node.js ≥ 20** und npm.
 
 ```bash
 # 1. Repository klonen und hineinwechseln
-git clone https://github.com/AdrianDeutsch/openai-chat-frontend.git
-cd openai-chat-frontend
+git clone https://github.com/AdrianDeutsch/textforge.git
+cd textforge
 
 # 2. Abhängigkeiten installieren
 npm install
@@ -83,14 +87,14 @@ Der Workflow [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pag
 1. Im Repository: **Settings → Pages → Source = GitHub Actions**.
 2. Push auf `main` (oder Workflow manuell über **Run workflow** starten) → der Build wird gebaut und deployed.
 
-Live-URL: **https://adriandeutsch.github.io/openai-chat-frontend/**
+Live-URL: **https://adriandeutsch.github.io/textforge/**
 
 Die Vite-Konfiguration nutzt `base: './'` (relative Pfade), sodass die App unter jedem Pages-Unterpfad funktioniert, ohne den Repository-Namen fest zu verdrahten.
 
 ## Projektstruktur
 
 ```text
-openai-chat-frontend/           # Repository-Root (App liegt direkt hier)
+textforge/                      # Repository-Root (App liegt direkt hier)
 ├── .github/workflows/          # GitHub-Actions: Build & Pages-Deploy
 ├── public/                     # statische Assets (favicon, icons)
 ├── index.html                  # Einstiegspunkt + Theme-Bootstrap (Anti-FOUC)
