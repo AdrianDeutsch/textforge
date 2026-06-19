@@ -14,11 +14,11 @@ export function Header({ onToggleSettings }: HeaderProps) {
     <header className="mb-6 flex flex-wrap items-center justify-between gap-4">
       <div className="flex items-center gap-3.5">
         <div className="grid h-10 w-10 place-items-center rounded-[11px] bg-linear-to-br from-accent to-accent-2 text-[18px] font-bold tracking-[-0.5px] text-white shadow-[0_4px_16px_var(--accent-glow),inset_0_1px_0_rgba(255,255,255,0.25)]">
-          L
+          T
         </div>
         <div>
-          <h1 className="m-0 text-[19px] font-semibold tracking-[-0.2px]">LLM Textwerkzeuge</h1>
-          <div className="mt-0.5 text-xs text-muted">Single-Shot · OpenAI-kompatibel</div>
+          <h1 className="m-0 text-[19px] font-semibold tracking-[-0.2px]">Textforge</h1>
+          <div className="mt-0.5 text-xs text-muted">LLM Textwerkzeuge · Single-Shot</div>
         </div>
       </div>
 
